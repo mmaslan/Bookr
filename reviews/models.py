@@ -50,3 +50,5 @@ class Review(models.Model):
     date_edited = models.DateTimeField(null=True, help_text='Data i czas ostatniej edycji recenzji.')
     creator = models.ForeignKey(auth.get_user_model(), on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, help_text='Recenzowana książka.')
+
+
