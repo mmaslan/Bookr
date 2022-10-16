@@ -23,12 +23,12 @@ class Book(models.Model):
 
 
 class Contributor(models.Model):
-    first_name = models.CharField(max_length=50, help_text='Imię lub imiona współtwórców.')
-    last_name = models.CharField(max_length=50, help_text='Nazwisko lub nazwiska współtwórców')
+    first_names = models.CharField(max_length=50, help_text='Imię lub imiona współtwórców.')
+    last_names = models.CharField(max_length=50, help_text='Nazwisko lub nazwiska współtwórców')
     email = models.EmailField(help_text='Email współtwórcy.')
 
     def __str__(self):
-        return self.first_name
+        return self.first_names
 
 
 class BookContributor(models.Model):
