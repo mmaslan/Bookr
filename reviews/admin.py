@@ -1,4 +1,4 @@
-from django.contrib.admin import AdminSite
+from django.contrib import admin
 
 from reviews.models import (
     Publisher,
@@ -9,17 +9,8 @@ from reviews.models import (
 )
 
 
-class BookrAdminSite(AdminSite):
-    title_header = 'Aplikacja administracyjna Bookr'
-    site_header = 'Aplikacja administracyjna Bookr'
-    index_title = 'Administracja witryną Bookr'
-
-
-admin_site = BookrAdminSite
-
-
-admin_site.register(Publisher)
-admin_site.register(Contributor)
-admin_site.register(Book)
-admin_site.register(BookContributor)
-admin_site.register(Review)
+admin.site.register(Publisher)
+admin.site.register(Contributor)
+admin.site.register(Book)
+admin.site.register(BookContributor)
+admin.site.register(Review)
