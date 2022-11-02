@@ -15,8 +15,10 @@ def isbn13(obj):
 
 
 class BookAdmin(admin.ModelAdmin):
+    date_hierarchy = 'publication_date'
     list_display = ('title', 'isbn')
-    list_filter = ('publisher',)
+    list_filter = ('publisher', 'publication_date')
+    search_fields = ('title', 'isbn', 'publication_date')
 
 
 def initialled_name(obj):
