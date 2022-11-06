@@ -12,14 +12,26 @@ class Publisher(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=70, help_text='Tutuł książki.')
-    publication_date = models.DateField(verbose_name='Data publikacji książki.')
-    isbn = models.CharField(max_length=20, verbose_name='Numer ISBN książki.')
-    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    contributors = models.ManyToManyField('Contributor', through='BookContributor')
+    """A published book."""
+    title = models.CharField(max_length=70,
+                             help_text="The title of the book.")
+    publication_date = models.DateField(
+        verbose_name="Date the book was published.")
+    isbn = models.CharField(max_length=20,
+                            verbose_name="ISBN number of the book.")
+    publisher = models.ForeignKey(Publisher,
+                                  on_delete=models.CASCADE)
+    contributors = models.ManyToManyField('Contributor',
+                                          through="BookContributor")
 
     def __str__(self):
-        return self.title
+        return "{} ({})".format(self.title, self.isbn)
+
+    def isbn13(self):
+        """ '9780316769174' => '978-0-31-676917-4' """
+        return "{}-{}-{}-{}-{}".format(self.isbn[0:3], self.isbn[3:4],
+                                       self.isbn[4:6], self.isbn[6:12],
+                                       self.isbn[12:13])
 
 
 class Contributor(models.Model):
