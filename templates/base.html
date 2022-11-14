@@ -19,11 +19,14 @@
       .navbar-brand {
         font-size: 25px;
       }
+      .navbar-brand > img {
+        height: 60px;
+      }
     </style>
   </head>
   <body>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
-          <a class="navbar-brand" href="/">Book Review</a>
+          <a class="navbar-brand" href="/">{% block brand %}Book Review{% endblock %</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
