@@ -39,6 +39,35 @@
                 </optgroup>
             </select>
         </p>
+        <p>
+            <label for="id_books_you_own">Twoje książki</label>
+            <select id="id_books_you_own" name="books_you_own" multiple>
+                <optgroup label="Literatura faktu">
+                    <option value="1">Deep Learning with Keras</option>
+                    <option value="2">Web Development with Django</option>
+                </optgroup>
+                <optgroup label="Literatura piękna">
+                    <option value="3">Brave New World</option>
+                    <option value="4">The Great Gatsby</option>
+                </optgroup>
+            </select>
+        </p>
+        <p>
+            <label for="id_text_area">Obszar tekstowy</label><br>
+            <textarea name="text_area" id="id_text_area" placeholder="Wpisz kilka wierszy tekstu"></textarea>
+        </p>
+        <p>
+            <label for="id_email_input">Pole e-mail</label><br>
+            <input id="id_email_input" type="email" name="email_input" value="" placeholder="Twój adres email">
+        </p>
+        <p>
+            <label for="id_date_input">Pole datyt</label><br>
+            <input id="id_date_input" type="date" name="date_input" value="2019-19-23">
+        </p>
+        <p>
+            <label for="id_number_input">Pole liczbowe</label><br>
+            <input id="id_number_input" type="number" name="number_input" value="" step="any" placeholder="Liczba">
+        </p>
     </form>
 </body>
 </html>
