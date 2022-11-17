@@ -5,7 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+    <h4>Metoda: {{ method }}</h4>
     <form method="post">
+        {% csrf_token %}
         <p>
             <label for="id_password_input">Hasło</label>
             <input id="id_password_input" type="password" name="password_input" value="" placeholder="Twoje hasło">
