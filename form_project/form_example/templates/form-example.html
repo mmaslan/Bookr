@@ -5,80 +5,18 @@
     <title>Title</title>
 </head>
 <body>
-    <h4>Metoda: {{ method }}</h4>
-    <form method="post">
-        {% csrf_token %}
-        <p>
-            <label for="id_password_input">Hasło</label>
-            <input id="id_password_input" type="password" name="password_input" value="" placeholder="Twoje hasło">
-        </p>
-        <p>
-            <label for="id_text_input">Tekst</label><br>
-            <input id="id_text_input" type="text" name="text_input" value="" placeholder="Wpisz jakis tekst">
-        </p>
-        <p>
-            <input id="id_checkbox_input" type="checkbox" name="checkbox_on" value="Pole zaznaczone" checked>
-            <label for="id_checkbox_input">Pole wyboru</label>
-        </p>
-        <p>
-            <input id="id_radio_one_input" type="radio" name="radio_input" value="Wartość jeden">
-            <label for="id_radio_one_input">Wartość jeden</label>
-            <input id="id_radio_one_input" type="radio" name="radio_input" value="Wartość dwa">
-            <label for="id_radio_one_input">Wartość dwa</label>
-            <input id="id_radio_one_input" type="radio" name="radio_input" value="Wartość trzy">
-            <label for="id_radio_one_input">Wartość trzy</label>
-        </p>
-        <p>
-            <label for="id_favorite_book">Ulubiona książka</label><br>
-            <select id="id_favorite_book" name="favorite book">
-                <optgroup label="Literatura faktu">
-                    <option value="1">Deep Learning with Keras</option>
-                    <option value="2">Web Development with Django</option>
-                </optgroup>
-                <optgroup label="Literatura piękna">
-                    <option value="3">Nowy wspaniały świat</option>
-                    <option value="4">Wielki Gatsby</option>
-                </optgroup>
-            </select>
-        </p>
-        <p>
-            <label for="id_books_you_own">Twoje książki</label>
-            <select id="id_books_you_own" name="books_you_own" multiple>
-                <optgroup label="Literatura faktu">
-                    <option value="1">Deep Learning with Keras</option>
-                    <option value="2">Web Development with Django</option>
-                </optgroup>
-                <optgroup label="Literatura piękna">
-                    <option value="3">Brave New World</option>
-                    <option value="4">The Great Gatsby</option>
-                </optgroup>
-            </select>
-        </p>
-        <p>
-            <label for="id_text_area">Obszar tekstowy</label><br>
-            <textarea name="text_area" id="id_text_area" placeholder="Wpisz kilka wierszy tekstu"></textarea>
-        </p>
-        <p>
-            <label for="id_email_input">Pole e-mail</label><br>
-            <input id="id_email_input" type="email" name="email_input" value="" placeholder="Twój adres email">
-        </p>
-        <p>
-            <label for="id_date_input">Pole datyt</label><br>
-            <input id="id_date_input" type="date" name="date_input" value="2019-19-23">
-        </p>
-        <p>
-            <label for="id_number_input">Pole liczbowe</label><br>
-            <input id="id_number_input" type="number" name="number_input" value="" step="any" placeholder="Liczba">
-        </p>
-        <p>
-            <input type="submit" name="submit_input" value="Wyślij dane">
-        </p>
-        <p>
-            <button type="submit" name="button_element" value="Przycisk">
-                Przycisk z <strong>ostylowanym</strong> tekstem
-            </button>
-        </p>
-        <input type="hidden" name="hidden_input" value="Ukryta wartość">
-    </form>
+<h4>Method: {{ method }}</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <input type="submit" name="submit_input" value="Submit Input">
+    </p>
+    <p>
+        <button type="submit" name="button_element" value="Button Element">
+            Button With <strong>Styled</strong> Text
+        </button>
+    </p>
+</form>
 </body>
 </html>
