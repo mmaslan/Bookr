@@ -3,10 +3,16 @@ from .forms import ExampleForm
 
 
 def form_example(request):
-    form = ExampleForm()
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+    else:
+        form = ExampleForm()
 
-    for name in request.POST:
-        print("{}: {}".format(name, request.POST.getlist(name)))
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            for name, value in form.cleaned_data.items():
+                print("{}: ({}) {}".format(name, type(value), value))
 
     return render(request, "form-example.html", {"method": request.method, "form": form})
 
