@@ -23,14 +23,14 @@ BOOK_CHOICES = (
 
 
 class ExampleForm(forms.Form):
-    text_input = forms.CharField()
-    password_input = forms.CharField(widget=forms.PasswordInput)
+    text_input = forms.CharField(max_length=3)
+    password_input = forms.CharField(min_length=8, widget=forms.PasswordInput)
     checkbox_on = forms.BooleanField()
     radio_input = forms.ChoiceField(choices=RADIO_CHOICES, widget=forms.RadioSelect)
     favorite_book = forms.ChoiceField(choices=BOOK_CHOICES)
-    books_you_own = forms.MultipleChoiceField(choices=BOOK_CHOICES)
+    books_you_own = forms.MultipleChoiceField(required=False, choices=BOOK_CHOICES)
     text_area = forms.CharField(widget=forms.Textarea)
-    integer_input = forms.IntegerField()
+    integer_input = forms.IntegerField(min_value=1, max_value=10)
     float_input = forms.FloatField()
     decimal_input = forms.DecimalField(max_digits=3)
     email_input = forms.EmailField()
