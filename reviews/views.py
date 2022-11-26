@@ -28,7 +28,7 @@ def book_search(request):
 
             lname_contributors = Contributor.objects.filter(last_names__iscontain=search)
             for contributor in lname_contributors:
-                for book in contributor.book_set.all()
+                for book in contributor.book_set.all():
                     books.add(book)
 
     return render(request, "reviews/search-results.html", {'form': form, 'search_text': search_text, 'books': books})
