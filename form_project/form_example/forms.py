@@ -36,4 +36,3 @@ class ExampleForm(forms.Form):
     email_input = forms.EmailField()
     date_input = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
     hidden_input = forms.CharField(widget=forms.HiddenInput, initial="Ukryta wartość")
-

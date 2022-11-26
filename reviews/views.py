@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from .models import Book, Review
 from .utils import average_rating
+from .forms import SearchForm
 
 
 def index(request):
@@ -10,7 +11,9 @@ def index(request):
 
 def book_search(request):
     search_text = request.GET.get("search", "")
-    return render(request, "reviews/search-results.html", {"search_text": search_text})
+    form = SearchForm(request.GET)
+
+    return render(request, "reviews/search-results.html", {'form': form, 'search_text': search_text, 'books': books})
 
 
 def book_list(request):
