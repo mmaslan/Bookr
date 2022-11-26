@@ -12,6 +12,7 @@ def index(request):
 def book_search(request):
     search_text = request.GET.get("search", "")
     form = SearchForm(request.GET)
+    books = set()
 
     return render(request, "reviews/search-results.html", {'form': form, 'search_text': search_text, 'books': books})
 
