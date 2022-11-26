@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Book, Review
+from .models import Book, Contributor
 from .utils import average_rating
 from .forms import SearchForm
 
@@ -21,8 +21,15 @@ def book_search(request):
         if search_in == "title":
             books = Book.objects.filter(title__icontains=search)
         else:
+            fname_contributors = Contributor.objects.filter(first_names__iscontain=search)
+            for contributor in fname_contributors:
+                for book in contributor.book_set.all():
+                    books.add(book)
 
-
+            lname_contributors = Contributor.objects.filter(last_names__iscontain=search)
+            for contributor in lname_contributors:
+                for book in contributor.book_set.all()
+                    books.add(book)
 
     return render(request, "reviews/search-results.html", {'form': form, 'search_text': search_text, 'books': books})
 
