@@ -1,7 +1,6 @@
 from django import forms
-from .forms import SearchForm
 
 
 class SearchForm(forms.Form):
-    search = forms.CharField(min_length=3)
-    search_in = forms.CharField()
+    search = forms.CharField(required=False, remin_length=3)
+    search_in = forms.CharField(required=False, choices=('title', 'Title', 'contributor', 'Contributor'))
