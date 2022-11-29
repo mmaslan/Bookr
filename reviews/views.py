@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Book, Contributor
 from .utils import average_rating
-from .forms import SearchForm
+from .forms import Review, SearchForm, ReviewForm
 
 
 def index(request):
@@ -53,3 +53,22 @@ def book_list(request):
         'book_list': book_list
     }
     return render(request, 'reviews/book_list.html', context)
+
+
+def review_edit(request, book_pk, review_pk=None):
+    book = get_object_or_404(Book, pk=book_pk)
+
+    if review_pk is not None:
+        review = get_object_or_404(Review, book_id=book_pk, pk=review_pk)
+    else:
+        review = None
+
+    if request.method == 'Post':
+        form = ReviewForm(request.POST, instance=review)
+
+        if form.is_valid():
+            update_review = form.save(False)
+            update_review.book = book
+
+            if review is None:
+                messages.success(request)
