@@ -74,3 +74,21 @@ def review_edit(request, book_pk, review_pk=None):
 
             if review is None:
                 messages.success(request)
+
+
+def publisher_edit(request, pk=None):
+    if pk is not None:
+        publisher = get_object_or_404(Publisher, pk=pk)
+    else:
+        publisher = None
+        if request.method == 'Post':
+            updated_publisher = form.save()
+            if publisher is None:
+                messages.success(request, 'Obiekt Publisher \"{}"\ został utworzony.'.format(updated_publisher))
+            else:
+                messages.success(request, 'Obiekt Publisher \"{}"\ został uaktywniony.'.format(updated_publisher))
+            return redirect('publisher_edit', updated_publisher.pk)
+        else:
+            form = PublisherForm(instance=publisher)
+
+    return render(request, 'form-example.html', {'method': request.method, 'form': form})
