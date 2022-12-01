@@ -23,22 +23,26 @@ def book_search(request):
         if search_in == "title":
             books = Book.objects.filter(title__icontains=search)
         else:
-            fname_contributors = Contributor.objects.filter(first_names__iscontain=search)
+            fname_contributors = \
+                Contributor.objects.filter(first_names__icontains=search)
+
             for contributor in fname_contributors:
                 for book in contributor.book_set.all():
                     books.add(book)
 
-            lname_contributors = Contributor.objects.filter(last_names__iscontain=search)
+            lname_contributors = \
+                Contributor.objects.filter(last_names__icontains=search)
+
             for contributor in lname_contributors:
                 for book in contributor.book_set.all():
                     books.add(book)
 
-    return render(request, "reviews/search-results.html", {'form': form, 'search_text': search_text, 'books': books})
+    return render(request, "reviews/search-results.html", {"form": form, "search_text": search_text, "books": books})
 
 
 def book_list(request):
     books = Book.objects.all()
-    book_list = []
+    books_with_reviews = []
     for book in books:
         reviews = book.review_set.all()
         if reviews:
@@ -47,14 +51,12 @@ def book_list(request):
         else:
             book_rating = None
             number_of_reviews = 0
-        book_list.append({'book': book,
-                          'book_rating': book_rating,
-                          'number_of_reviews': number_of_reviews})
+        books_with_reviews.append({"book": book, "book_rating": book_rating, "number_of_reviews": number_of_reviews})
 
     context = {
-        'book_list': book_list
+        "book_list": books_with_reviews
     }
-    return render(request, 'reviews/book_list.html', context)
+    return render(request, "reviews/book_list.html", context)
 
 
 def book_detail(request, pk):
@@ -109,7 +111,8 @@ def publisher_edit(request, pk=None):
                 messages.success(request, 'Obiekt Publisher \"{}"\ został utworzony.'.format(updated_publisher))
             else:
                 messages.success(request, 'Obiekt Publisher \"{}"\ został uaktywniony.'.format(updated_publisher))
-            return redirect('publisher_edit', updated_publisher.pk)
+
+            return redirect("publisher_edit", updated_publisher.pk)
     else:
         form = PublisherForm(instance=publisher)
 
