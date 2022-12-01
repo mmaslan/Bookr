@@ -57,6 +57,25 @@ def book_list(request):
     return render(request, 'reviews/book_list.html', context)
 
 
+def book_detail(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    reviews = book.review_set.all()
+    if reviews:
+        book_rating = average_rating([review.rating for review in reviews])
+        context = {
+            "book": book,
+            "book_rating": book_rating,
+            "reviews": reviews
+        }
+    else:
+        context = {
+            "book": book,
+            "book_rating": None,
+            "reviews": None
+        }
+    return render(request, "reviews/book_detail.html", context)
+
+
 def review_edit(request, book_pk, review_pk=None):
     book = get_object_or_404(Book, pk=book_pk)
 
@@ -81,14 +100,17 @@ def publisher_edit(request, pk=None):
         publisher = get_object_or_404(Publisher, pk=pk)
     else:
         publisher = None
-        if request.method == 'Post':
+
+    if request.method == "POST":
+        form = PublisherForm(request.POST, instance=publisher)
+        if form.is_valid():
             updated_publisher = form.save()
             if publisher is None:
                 messages.success(request, 'Obiekt Publisher \"{}"\ został utworzony.'.format(updated_publisher))
             else:
                 messages.success(request, 'Obiekt Publisher \"{}"\ został uaktywniony.'.format(updated_publisher))
             return redirect('publisher_edit', updated_publisher.pk)
-        else:
-            form = PublisherForm(instance=publisher)
+    else:
+        form = PublisherForm(instance=publisher)
 
-    return render(request, 'form-example.html', {'method': request.method, 'form': form})
+    return render(request, "form-example.html", {"method": request.method, "form": form})
