@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+import media_example.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('media-example/', media_example.views.media_example)
 ]
 
 if settings.DEBUG:
