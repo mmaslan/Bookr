@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-    <a href="{{ MEDIA_URL }}test.txt">Przetestuj plik tekstowy</a>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file_upload">
+        <button type="submit">Wyślij</button>
+    </form>
 </body>
 </html>
