@@ -6,3 +6,4 @@ sqlparse~=0.4.2
 colorama~=0.4.4
 requests~=2.27.1
 setuptools~=57.4.0
+Pillow==9.3.0
