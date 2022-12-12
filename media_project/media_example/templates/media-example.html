@@ -7,7 +7,7 @@
 <body>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="file_upload">
+        {{ form.as_p }}
         <button type="submit">Wyślij</button>
     </form>
 </body>
