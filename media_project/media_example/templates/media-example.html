@@ -10,5 +10,8 @@
         {{ form.as_p }}
         <button type="submit">Wyślij</button>
     </form>
+    {{% if instance %}}
+        <img src="{{ instance.image_field.url }}">
+    {% endif %}
 </body>
 </html>
