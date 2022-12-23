@@ -19,6 +19,7 @@ def index(request):
 
 def book_search(request):
     search_text = request.GET.get("search", "")
+    search_history = request.session.get('search_history', [])
     form = SearchForm(request.GET)
     books = set()
     if form.is_valid() and form.cleaned_data["search"]:
@@ -42,6 +43,14 @@ def book_search(request):
             for contributor in lname_contributors:
                 for book in contributor.book_set.all():
                     books.add(book)
+
+        if request.user.is_authenticated:
+            search_history.append([search_in, search])
+            request.session['search_history'] = search_history
+    elif search_history:
+        initial = dict(search=search_text,
+                       search_in=search_history[-1][0])
+        form = SearchForm(initial=initial)
 
     return render(request, "reviews/search-results.html", {"form": form, "search_text": search_text, "books": books})
 
