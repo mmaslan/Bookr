@@ -81,6 +81,17 @@ def book_detail(request, pk):
             "book_rating": None,
             "reviews": None
         }
+
+    if request.user.is_authenticated:
+        max_viewed_books_lenght = 10
+        viewed_books = request.session.get('viewed_books', [])
+        viewed_book = [book.id, book.title]
+        if viewed_book in viewed_books:
+            viewed_books.pop(viewed_books.index(viewed_book))
+        viewed_books.insert(0, viewed_book)
+        viewed_books = viewed_books[:max_viewed_books_lenght]
+        request.session['viewed_books'] = viewed_books
+
     return render(request, "reviews/book_detail.html", context)
 
 
